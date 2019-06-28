@@ -1,5 +1,7 @@
-left = input("How many points does left side have? ")
-right = input("How many points does right side have? ")
+Team1 = input("Team1 name: ")
+Team2 = input("Team2 name: ")
+left = input("How many points does "+Team1+" side have? ")
+right = input("How many points does "+Team2+" side have? ")
 r = int(right)
 le = int(left)
 match = input("Q: for quick match. L: for long match ")
@@ -11,6 +13,20 @@ else:
     points = 11
     switch = 2
 
+def gamePoint(score, pts):
+    if score == pts-1:
+        print("\n*****Game Point******\n")
+        
+def winner(winner):
+    print("*****************************************")
+    print("\t   Winner is " + winner)
+    print("*****************************************")
+    print("")
+
+def switchCheck(total, switch):
+    if total % switch ==0:
+        print("\n*****Switch*****\n")
+
 count = 0
 while le <= points or r <= points:
     if le == points:
@@ -18,35 +34,22 @@ while le <= points or r <= points:
     elif r == points:
         break
     else:
-        print("left: " + str(le) + " Right: " + str(r))
-        scored = input("Who scored a point: l or r? ")
-        count += 1
+        print(Team1+" (left): " + str(le) + " "+Team2+" (right): "+ str(r))
+        goal = input("Who scored a point: l or r? ")
         print("")
-        if scored  == "l":
+        if goal == "l":
             le += 1
-
-            if le == points-1:
-                print("")
-                print("Game Point")
-                print()
+            gamePoint(le, points)
+            switchCheck(le + r, switch)
+                
         else:
             r += 1
-            if r == points-1:
-                print("")
-                print("Game Point")
-                print()
+            gamePoint(r, points)
+            switchCheck(le+r, switch)
 
 if le == points:
-    print("*****************************************")
-    print("\t   Winner is Left")
-    print("*****************************************")
-    print("")
+    winner(Team1)
 else:
-    print("*****************************************")
-    print("\t   Winner is Right")
-    print("*****************************************")
-    print("")
-
-
+    winner(Team2)
 
 print("\n\n Good Game")
